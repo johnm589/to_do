@@ -7,6 +7,37 @@ function index(req, res) {
   })
 }
 
+// function create(req, res){
+//   console.log('Create item')
+// //form field
+//   var item = new Item()
+//
+//   item.item_name = req.body.item_name
+//
+//   item.save(function(err){
+//     if (err){
+//       res.send(err)
+//     }
+//     res.json({success: true, message: 'item created!'})
+//   })
+// }
+
+
+function create(req, res){
+  console.log('Create item')
+//form field
+  var item = new Item()
+
+  item.item_name = req.params.item_name
+
+  item.save(function(err){
+    if (err){
+      res.send(err)
+    }
+    res.json({success: true, message: 'item created!'})
+  })
+}
+
 function show(req, res) {
   Item.find({item_name: req.params.item_name}, function(err, item){
     if (err) res.send(err)
@@ -26,7 +57,7 @@ function create(req, res) {
 
   var item = new Item()
 
-  item.item_name = req.body.item_name
+  item.item_name = req.params.item_name
 
   item.save(function(err) {
     if (err) {
@@ -36,24 +67,11 @@ function create(req, res) {
   })
 }
 
-function update(req, res){
-  Item.find({item_name: req.params.item_name}, function(err, item){
-    if(err) res.send(err)
-
-    if(req.body.itemname)
-      item.item_name = req.body.item_name
-
-    item.save(function(err){
-      if (err) res.send(err)
-      res.json({success: true, message: 'item created!'})
-    })
-  })
-}
 
 module.exports = {
   getAllItems: index,
   createItem: create,
   showItem: show,
   deleteItem: destroy,
-  updateItem: update
+
 }

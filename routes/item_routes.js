@@ -4,11 +4,11 @@ var itemsController = require('../controllers/item_controller.js'),
 
 itemRoutes.route('/')
   .get(itemsController.getAllItems)
-  .post(itemsController.createItem)
+
 
 itemRoutes.route('/:item_name')
+  .post(itemsController.createItem)
   .get(itemsController.showItem)
-  .put(itemsController.updateItem)
   .delete(itemsController.deleteItem)
 
   module.exports = itemRoutes
