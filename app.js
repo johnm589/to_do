@@ -1,0 +1,5 @@
+var express = require('express')
+  , logger = require('morgan')
+  , bodyParser = require('body-parser')
+  , mongoose = require('mongoose')
+  , app = express()
