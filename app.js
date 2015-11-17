@@ -15,13 +15,14 @@ app.use(logger('dev'))
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({extended: false}))
 
+app.use(express.static('public'));
 
 //Set the view engine as ejs
 app.set('view engine', 'ejs')
 
 //Set the root path to display the index.ejs
 app.get('/', function(req, res) {
-  res.send('homepage')
+  res.render('index', {title: 'WOOO'})
 })
 
 
