@@ -5,8 +5,12 @@ var express = require('express')
   , app = express()
   , ejs = require('ejs')
 
+//Set the view engine as ejs
+app.set('view engine', 'ejs')
+
+//Set the root path to display the index.ejs
 app.get('/', function(req, res) {
-  res.send('WORKED!')
+  res.render('index', {title: 'HORAYY'})
 })
 
 
