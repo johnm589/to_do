@@ -4,13 +4,16 @@ var express = require('express')
   , mongoose = require('mongoose')
   , app = express()
   , ejs = require('ejs')
+  , Item = require('./models/item.js')
+
+
+mongoose.connect('mongodb://localhost/item')
 
 //Logger
 app.use(logger('dev'))
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({extended: false}))
 
-mongoose.connect('mongodb://localhost/items')
 
 //Set the view engine as ejs
 app.set('view engine', 'ejs')
@@ -20,14 +23,19 @@ app.get('/', function(req, res) {
   res.render('index', {title: 'HORAYY'})
 })
 
-var Item = require('./models/item.js')
+app.get('/:item_name', function(req, res) {
+  Item.find({item_name: req.params.item_name}, function(err, item) {
+    if (err) console.log(err);
+    res.json(item)
+  })
+})
 
 var Milk = new Item({
-  item_name: 'MILK'
+  item_name: 'milk'
 })
 
 Milk.save(function(err) {
-  if (err) console.log(err)
+  if (err) console.log(err);
   console.log('Milk created')
 })
 
