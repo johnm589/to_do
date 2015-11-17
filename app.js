@@ -5,8 +5,11 @@ var express = require('express')
   , app = express()
   , ejs = require('ejs')
 
+
+app.set('view engine', 'ejs')
+
 app.get('/', function(req, res) {
-  res.send('WORKED!')
+  res.render('index', {title: 'To-Do-list'})
 })
 
 
