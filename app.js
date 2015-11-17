@@ -5,6 +5,7 @@ var express = require('express')
   , app = express()
   , ejs = require('ejs')
   , Item = require('./models/item.js')
+  , itemRoutes = require('./routes/item_routes.js')
 
 
 mongoose.connect('mongodb://localhost/item')
@@ -20,24 +21,11 @@ app.set('view engine', 'ejs')
 
 //Set the root path to display the index.ejs
 app.get('/', function(req, res) {
-  res.render('index', {title: 'HORAYY'})
+  res.send('homepage')
 })
 
-app.get('/:item_name', function(req, res) {
-  Item.find({item_name: req.params.item_name}, function(err, item) {
-    if (err) console.log(err);
-    res.json(item)
-  })
-})
 
-var Milk = new Item({
-  item_name: 'milk'
-})
-
-Milk.save(function(err) {
-  if (err) console.log(err);
-  console.log('Milk created')
-})
+app.use('/items', itemRoutes)
 
 
 app.listen(3000, function(){
